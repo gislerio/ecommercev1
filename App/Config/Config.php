@@ -13,13 +13,14 @@ define("DATA_ENV", [
     "password" => "{$env['password']}"
 ]);
 
+$envMailPath = realpath(dirname(__FILE__) . '/mail.ini');
+//echo $envPath;
+$envMail = parse_ini_file($envMailPath);
 
-
-/* define("MAIL", [
-    "host" => "smtp.gmail.com",
-    "port" => "587",
-    "user" => "email",
-    "passwd" => "senha",
-    "from_nome"=>"nome",
-    "from_email" => "email"
-]); */
+define("MAIL_ENV", [
+    "host" => "{$envMail['host']}",
+    "port" => "{$envMail['port']}",
+    "userName" => "{$envMail['userName']}",
+    "password" => "{$envMail['password']}",
+    "setFrom" => "{$envMail['setFrom']}"
+]);
