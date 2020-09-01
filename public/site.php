@@ -1,6 +1,7 @@
 <?php
 
 use App\Config\Page;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -41,5 +42,18 @@ $app->get("/products/:desurl", function ($desurl) {
     $page->setTpl("product-detail", [
         'product' => $product->getValues(),
         'categories' => $product->getCategories()
+    ]);
+});
+
+//carrinho de compra
+
+$app->get("/cart", function () {
+    $cart = Cart::getFromSession();
+
+    $page = new Page();
+    $page->setTpl("cart", [
+        'cart' => $cart->getValues(),
+        'products' => $cart->getProducts()
+        //'error' => Cart::getMsgError()
     ]);
 });
